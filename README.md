@@ -151,6 +151,8 @@ Once the server starts, you'll see:
 
 Both devices can send and receive files in either direction.
 
+> **Folders:** WebRTC Data Channels transfer single files. To send a folder, **compress it into a ZIP first** (right-click → Compress on macOS, or Send to → Compressed folder on Windows), then drag and drop the ZIP file.
+
 ---
 
 ## Project Structure

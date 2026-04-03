@@ -237,7 +237,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // ── WebRTC ───────────────────────────────────────────────────
     const rtcConfig = {
-        iceServers: [] // Local network — no STUN/TURN needed
+        iceServers: [
+            { urls: "stun:stun.l.google.com:19302" },
+            { urls: "stun:stun1.l.google.com:19302" },
+        ]
     };
 
     function cleanupPeerConnection() {
@@ -294,7 +297,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 size: selectedFile.size,
                 mimeType: selectedFile.type,
             }));
-            sendFileChunks();
+            // Don't send chunks yet — wait for receiver "ready" signal
+        };
+
+        dataChannel.onmessage = (e) => {
+            if (typeof e.data === "string") {
+                let msg;
+                try { msg = JSON.parse(e.data); } catch { return; }
+                if (msg.type === "ready") {
+                    console.log("[WebRTC] Receiver ready — starting chunk transfer");
+                    sendFileChunks();
+                }
+            }
         };
 
         dataChannel.onerror = (e) => {
@@ -422,6 +436,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     incomingFileInfo = msg;
                     showTransfer("Receiving...", msg.name);
                     console.log("[FileShare] Receiving:", msg.name, formatSize(msg.size));
+                    // Tell sender we're ready to receive chunks
+                    dataChannel.send(JSON.stringify({ type: "ready" }));
                 } else if (msg.type === "file-end") {
                     assembleAndDownload();
                 }
