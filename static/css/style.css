@@ -1,0 +1,355 @@
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --border: #2a2d3a;
+    --text: #e4e4e7;
+    --text-muted: #71717a;
+    --accent: #6366f1;
+    --accent-glow: rgba(99, 102, 241, 0.25);
+    --green: #22c55e;
+    --red: #ef4444;
+    --orange: #f59e0b;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+#app {
+    width: 100%;
+    max-width: 540px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.subtitle {
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+    font-size: 0.95rem;
+}
+
+/* ── Dropzone ─────────────────────────────────── */
+
+#dropzone {
+    border: 2px dashed var(--border);
+    border-radius: 16px;
+    padding: 3rem 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.25s, background 0.25s, box-shadow 0.25s;
+    background: var(--surface);
+    position: relative;
+}
+
+#dropzone:hover,
+#dropzone.drag-over {
+    border-color: var(--accent);
+    background: rgba(99, 102, 241, 0.06);
+    box-shadow: 0 0 30px var(--accent-glow);
+}
+
+#dropzone.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.dropzone-content .icon {
+    width: 48px;
+    height: 48px;
+    color: var(--accent);
+    margin-bottom: 1rem;
+}
+
+.icon-file {
+    width: 40px;
+    height: 40px;
+}
+
+.cta {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.hint {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-top: 0.35rem;
+}
+
+.file-info {
+    margin-bottom: 1.25rem;
+}
+
+.file-name {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    word-break: break-all;
+}
+
+.file-size {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-top: 0.2rem;
+}
+
+/* ── Buttons ──────────────────────────────────── */
+
+.btn-send {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    padding: 0.6rem 1.5rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.1s;
+}
+
+.btn-send:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.btn-send:not(:disabled):hover {
+    opacity: 0.85;
+}
+
+.btn-send:not(:disabled):active {
+    transform: scale(0.97);
+}
+
+.btn-clear {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    cursor: pointer;
+    margin-top: 0.75rem;
+    text-decoration: underline;
+}
+
+.btn-clear:hover {
+    color: var(--text);
+}
+
+/* ── Peer list ────────────────────────────────── */
+
+#peer-list {
+    margin-top: 1.5rem;
+}
+
+.section-label {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+}
+
+#peers {
+    list-style: none;
+}
+
+#peers li {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.7rem 1rem;
+    margin-bottom: 0.4rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+#peers li:hover,
+#peers li.selected {
+    border-color: var(--accent);
+    background: rgba(99, 102, 241, 0.04);
+}
+
+#peers li .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--green);
+    margin-right: 0.6rem;
+    flex-shrink: 0;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+#peers li .peer-id {
+    flex: 1;
+    font-size: 0.9rem;
+}
+
+/* ── Incoming offer ───────────────────────────── */
+
+#incoming {
+    margin-top: 1.5rem;
+    animation: slideIn 0.3s ease;
+}
+
+.incoming-card {
+    background: var(--surface);
+    border: 1px solid var(--accent);
+    border-radius: 12px;
+    padding: 1.25rem;
+    text-align: center;
+}
+
+.incoming-actions {
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+}
+
+.btn-accept {
+    background: var(--green);
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1.25rem;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.btn-accept:hover { opacity: 0.85; }
+
+.btn-reject {
+    background: transparent;
+    color: var(--red);
+    border: 1px solid var(--red);
+    padding: 0.5rem 1.25rem;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.btn-reject:hover { opacity: 0.85; }
+
+/* ── Transfer progress ────────────────────────── */
+
+#transfer {
+    margin-top: 1.5rem;
+    animation: slideIn 0.3s ease;
+}
+
+.transfer-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+    text-align: center;
+}
+
+.transfer-label {
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+
+.transfer-file {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
+    word-break: break-all;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--accent);
+    border-radius: 4px;
+    transition: width 0.15s ease;
+}
+
+.progress-fill.done {
+    background: var(--green);
+}
+
+.progress-fill.error {
+    background: var(--red);
+}
+
+.transfer-stats {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+}
+
+.transfer-speed {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    margin-top: 0.2rem;
+}
+
+/* ── Status ───────────────────────────────────── */
+
+#status {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* ── Animations ───────────────────────────────── */
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Utility ──────────────────────────────────── */
+
+.hidden {
+    display: none !important;
+}
+
+/* ── Mobile tweaks ────────────────────────────── */
+
+@media (max-width: 480px) {
+    header h1 { font-size: 1.6rem; }
+    #dropzone { padding: 2rem 1.25rem; }
+    .dropzone-content .icon { width: 40px; height: 40px; }
+}

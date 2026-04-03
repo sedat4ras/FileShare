@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FileShare</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1>FileShare</h1>
+            <p class="subtitle">Secure P2P File Transfer on Your Local Network</p>
+        </header>
+        <main>
+            <div id="dropzone">
+                <div class="dropzone-content" id="dropzone-default">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                         stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                        <polyline points="17 8 12 3 7 8"/>
+                        <line x1="12" y1="3" x2="12" y2="15"/>
+                    </svg>
+                    <p class="cta">Drag &amp; drop a file here</p>
+                    <p class="hint">or click to select</p>
+                </div>
+                <div class="dropzone-content hidden" id="dropzone-ready">
+                    <div class="file-info">
+                        <svg class="icon icon-file" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                        </svg>
+                        <p class="file-name" id="file-name"></p>
+                        <p class="file-size" id="file-size"></p>
+                    </div>
+                    <button id="btn-send" class="btn-send" disabled>Select a peer to send</button>
+                    <button id="btn-clear" class="btn-clear">Clear</button>
+                </div>
+                <input type="file" id="file-input" hidden>
+            </div>
+
+            <div id="peer-list" class="hidden">
+                <p class="section-label">Devices on your network</p>
+                <ul id="peers"></ul>
+            </div>
+
+            <div id="incoming" class="hidden">
+                <div class="incoming-card">
+                    <p><strong id="incoming-sender"></strong> wants to send you:</p>
+                    <p class="file-name" id="incoming-name"></p>
+                    <p class="file-size" id="incoming-size"></p>
+                    <div class="incoming-actions">
+                        <button id="btn-accept" class="btn-accept">Accept</button>
+                        <button id="btn-reject" class="btn-reject">Decline</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="transfer" class="hidden">
+                <div class="transfer-card">
+                    <p class="transfer-label" id="transfer-label">Sending...</p>
+                    <p class="transfer-file" id="transfer-file"></p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                    <p class="transfer-stats" id="transfer-stats">0%</p>
+                    <p class="transfer-speed" id="transfer-speed"></p>
+                </div>
+            </div>
+
+            <div id="status">
+                <p>Connecting&hellip;</p>
+            </div>
+        </main>
+    </div>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
