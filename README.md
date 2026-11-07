@@ -1,6 +1,6 @@
 # FileShare — Secure Local P2P File Transfer
 
-FileShare is a **peer-to-peer file transfer tool** that works entirely on your local network. Open a browser on any device, drag and drop a file, and send it directly to another device — no cloud, no account, no internet required.
+FileShare is a **peer-to-peer file transfer tool** that works entirely on your local network. Open a browser on any device, drag and drop a file, and send it directly to another device. It needs no cloud, account, or internet connection.
 
 All file data flows **directly between browsers** over an encrypted WebRTC connection. The server never sees or touches your files.
 
@@ -10,11 +10,11 @@ All file data flows **directly between browsers** over an encrypted WebRTC conne
 
 Transferring files between your own devices shouldn't require uploading to a cloud service, plugging in cables, or installing heavy apps. Existing solutions either:
 
-- **Route your data through external servers** (WeTransfer, Google Drive, AirDrop alternatives) — slow and a privacy concern.
-- **Require software installation on every device** (Syncthing, Resilio) — heavy setup for a simple task.
+- **Route your data through external servers** (WeTransfer, Google Drive, AirDrop alternatives): slow and a privacy concern.
+- **Require software installation on every device** (Syncthing, Resilio): heavy setup for a simple task.
 - **Only work within one ecosystem** (AirDrop is Apple-only, Nearby Share is Android/Windows-only).
 
-FileShare solves this: **one device runs the server, every other device just opens a browser.** It works across Windows, macOS, Linux, iOS, and Android — anything with a modern browser.
+FileShare solves this: **one device runs the server, every other device just opens a browser.** It works across Windows, macOS, Linux, iOS, and Android, or anything with a modern browser.
 
 ---
 
@@ -35,10 +35,10 @@ FileShare solves this: **one device runs the server, every other device just ope
 1. **Device A** selects a file and clicks "Send"
 2. The server relays a small signaling message (connection metadata only)
 3. A **direct WebRTC connection** is established between the two browsers
-4. The file is split into 64KB chunks and transferred directly — **the server transfers zero bytes of file data**
+4. The file is split into 64KB chunks and transferred directly, and **the server transfers zero bytes of file data**
 5. Device B automatically downloads the reassembled file
 
-Both devices can send and receive — the connection is fully bidirectional.
+Both devices can send and receive over a fully bidirectional connection.
 
 ---
 
@@ -131,7 +131,7 @@ Once the server starts, you'll see:
 
 - **On the host machine:** Open `http://localhost:8000`
 - **On other devices:** Open `http://fileshare.local:8000` or use the IP address shown in the terminal
-- **On mobile:** Simply type the address in your phone's browser — no app install needed
+- **On mobile:** Type the address in your phone's browser. You don't need to install an app
 
 > **Windows Firewall:** If other devices can't connect, allow port 8000:
 > ```
@@ -147,7 +147,7 @@ Once the server starts, you'll see:
 3. On the sending device: **drag & drop a file** (or click to select)
 4. Click **"Send to peer-xxxxx"**
 5. On the receiving device: click **"Accept"**
-6. Watch the progress bar — the file downloads automatically when complete
+6. Watch the progress bar. The file downloads automatically when complete
 
 Both devices can send and receive files in either direction.
 
